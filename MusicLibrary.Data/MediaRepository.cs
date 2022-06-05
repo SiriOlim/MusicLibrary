@@ -15,7 +15,7 @@ namespace MusicLibrary.Data
         {
             try
             {
-                string fileDir = @"..\MusicLibrary.Data\SampleMediaStorage.json";
+                string fileDir = @"~\SampleMediaStorage.json";
                 var stringData = File.ReadAllText(fileDir);
 
                 var data = JsonSerializer.Deserialize<List<Media>>(stringData);
