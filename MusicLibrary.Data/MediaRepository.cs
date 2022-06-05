@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.Reflection;
 
 namespace MusicLibrary.Data
 {
@@ -15,8 +16,9 @@ namespace MusicLibrary.Data
         {
             try
             {
-                string fileDir = @"~\SampleMediaStorage.json";
-                var stringData = File.ReadAllText(fileDir);
+                var parent = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+                string filePath = Path.Combine(parent, "SampleMediaStorage.json");
+                var stringData = File.ReadAllText(filePath);
 
                 var data = JsonSerializer.Deserialize<List<Media>>(stringData);
 
