@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Title": "TestMedia",
+    "Songs": [
+      {
+        "Id": "68e9d4da-ddca-49a0-8582-ab77646d9216",
+        "Title": "test song #1",
+        "Artist": "test artist",
+        "Duration": 4.5
+      }
+    ]
+  }
+]
