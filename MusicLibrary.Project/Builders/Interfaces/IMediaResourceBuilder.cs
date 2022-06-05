@@ -7,5 +7,7 @@ namespace MusicLibrary.Project.Builders.Interfaces
     {
         MediaResource Build(Media media);
         SongResource Build(Song song);
+        Media Build(MediaResource media);
+        Song Build(SongResource song);
     }
 }

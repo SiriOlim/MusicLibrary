@@ -15,5 +15,11 @@ namespace MusicLibrary.Project.Controllers
         {
             return await handler.HandleGet();
         }
+
+        [HttpPost]
+        public async Task<ApiResponseResource> Post([FromServices] IMediaHandler handler, UpsertMediaRequestResource request)
+        {
+            return await handler.HandlePost(request);
+        }
     }
 }

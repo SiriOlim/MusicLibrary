@@ -21,5 +21,10 @@ namespace MusicLibrary.Services
         {
             return await _mediaServiceHandler.HandleGet();
         }
+
+        public async Task<Media> Upsert(Media media)
+        {
+            return await _mediaServiceHandler.HandleUpsert(media);
+        }
     }
 }

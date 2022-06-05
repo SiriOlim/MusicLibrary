@@ -10,5 +10,6 @@ namespace MusicLibrary.ServiceInterfaces
     public interface IMediaService
     {
         Task<List<Media>> Get();
+        Task<Media> Upsert(Media media);
     }
 }

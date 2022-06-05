@@ -2,7 +2,8 @@
 {
     public class ApiResponseResource
     {
+        public bool Success { get; set; }
         public List<MediaResource>? MediaResources { get; set; }
-        public string? ErrorMessage {get;set;}
+        public string? Message {get;set;}
     }
 }

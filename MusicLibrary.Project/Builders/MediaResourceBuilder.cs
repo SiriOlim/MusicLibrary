@@ -24,5 +24,24 @@ namespace MusicLibrary.Project.Builders
             resource.Duration = song.Duration;
             return resource;
         }
+
+        public Media Build(MediaResource resource)
+        {
+            var media = new Media();
+            media.Id = resource.Id;
+            media.Title = resource.Title;
+            media.Songs = resource?.Songs?.Select(Build).ToList() ?? new();
+            return media;
+        }
+
+        public Song Build(SongResource resource)
+        {
+            var song = new Song();
+            song.Id = resource.Id;
+            song.Title = resource.Title;
+            song.Artist = resource.Artist;
+            song.Duration = resource.Duration;
+            return song;
+        }
     }
 }
