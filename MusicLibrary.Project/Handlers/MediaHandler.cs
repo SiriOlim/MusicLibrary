@@ -25,7 +25,6 @@ namespace MusicLibrary.Project.Handlers
                 {
                     ErrorMessage = "",
                     MediaResources = res.Select(_mediaResourceBuilder.Build).ToList(),
-                    Exception = null
                 };
             }
             catch(Exception ex)
@@ -34,7 +33,6 @@ namespace MusicLibrary.Project.Handlers
                 return new ApiResponseResource()
                 {
                     ErrorMessage = ex.Message,
-                    Exception = ex,
                     MediaResources = new()
                 };
             }
