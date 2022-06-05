@@ -11,7 +11,7 @@ namespace MusicLibrary.Project.Controllers
     public class MediaController : ControllerBase
     {
         [HttpGet]
-        public async Task<List<MediaResource>> Get([FromServices] IMediaHandler handler)
+        public async Task<ApiResponseResource> Get([FromServices] IMediaHandler handler)
         {
             return await handler.HandleGet();
         }

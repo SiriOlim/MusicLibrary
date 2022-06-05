@@ -4,6 +4,6 @@ namespace MusicLibrary.Project.Handlers.Interfaces
 {
     public interface IMediaHandler
     {
-        Task<List<MediaResource>> HandleGet();
+        Task<ApiResponseResource> HandleGet();
     }
 }

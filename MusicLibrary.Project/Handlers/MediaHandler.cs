@@ -15,11 +15,29 @@ namespace MusicLibrary.Project.Handlers
             _mediaResourceBuilder = mediaResourceBuilder;
             _mediaService = mediaService;
         }
-        public async Task<List<MediaResource>> HandleGet()
+        public async Task<ApiResponseResource> HandleGet()
         {
-            var res = await _mediaService.Get();
+            try
+            {
+                var res = await _mediaService.Get();
 
-            return res.Select(_mediaResourceBuilder.Build).ToList();
+                return new()
+                {
+                    ErrorMessage = "",
+                    MediaResources = res.Select(_mediaResourceBuilder.Build).ToList(),
+                    Exception = null
+                };
+            }
+            catch(Exception ex)
+            {
+                // Log Error
+                return new ApiResponseResource()
+                {
+                    ErrorMessage = ex.Message,
+                    Exception = ex,
+                    MediaResources = new()
+                };
+            }
         }
     }
 }
