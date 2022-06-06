@@ -20,23 +20,12 @@ namespace MusicLibrary.Project.Handlers
             try
             {
                 var res = await _mediaService.Get();
-
-                return new()
-                {
-                    Success = true,
-                    Message = "",
-                    MediaResources = res.Select(_mediaResourceBuilder.Build).ToList(),
-                };
+                return BuildApiResponse(true, "", res.Select(_mediaResourceBuilder.Build).ToList());
             }
             catch(Exception ex)
             {
                 // Log Error
-                return new ApiResponseResource()
-                {
-                    Success = false,
-                    Message = ex.Message,
-                    MediaResources = new()
-                };
+                return BuildApiResponse(false, ex.Message, new());
             }
         }
 
@@ -44,14 +33,8 @@ namespace MusicLibrary.Project.Handlers
         {
             if(request.Media is null)
             {
-                return new ApiResponseResource()
-                {
-                    Success = false,
-                    Message = "Invalid Request. Media can not be null.",
-                    MediaResources = new()
-                };
+                return BuildApiResponse(false, "Invalid Request. Media can not be null.", new());
             }
-
             try
             {
                 var media = _mediaResourceBuilder.Build(request.Media);
@@ -60,12 +43,11 @@ namespace MusicLibrary.Project.Handlers
 
                 var resources = new List<MediaResource>();
                 resources.Add(_mediaResourceBuilder.Build(res));
-                return BuildApiResponse(true, "Upsert successful.", resources);
+                return BuildApiResponse(true, "Upsert operation successful.", resources);
             }
             catch(Exception ex)
             {
                 return BuildApiResponse(false, ex.Message, new());
-
             }
         }
 

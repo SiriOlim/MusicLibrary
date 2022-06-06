@@ -38,16 +38,17 @@ namespace MusicLibrary.Data
         {
             try
             {
-                var stringData = File.ReadAllText(_filePath);
+                ProcessMedia(media);
 
+                var stringData = File.ReadAllText(_filePath);
                 var mediaList = JsonSerializer.Deserialize<List<Media>>(stringData);
 
-                var isFound = mediaList.FirstOrDefault(x => x.Id == media.Id);
+                var isFound = mediaList?.FirstOrDefault(x => x.Id == media.Id);
                 if (isFound != null)
                 {
                     // Update
-                    mediaList.Remove(isFound);
-                    mediaList.Add(media);
+                    mediaList?.Remove(isFound);
+                    mediaList?.Add(media);
 
                     var data = JsonSerializer.Serialize(mediaList);
 
@@ -56,7 +57,7 @@ namespace MusicLibrary.Data
                 else
                 {
                     // Insert
-                    mediaList.Add(media);
+                    mediaList?.Add(media);
 
                     var data = JsonSerializer.Serialize(mediaList);
 
@@ -74,6 +75,23 @@ namespace MusicLibrary.Data
         private async Task SaveFile(string data)
         {
             await File.WriteAllTextAsync(_filePath, data);
+        }
+
+        private bool IsOver60(Media media)
+        {
+            return media?.Songs?.Sum(x => x.Duration) > 60;
+        }
+
+        private void ProcessMedia(Media media)
+        {
+            if(!IsOver60(media))
+            {
+                return;
+            }
+            else
+            {
+                throw new Exception("Media exceeded limit.");
+            }
         }
     }
 }
