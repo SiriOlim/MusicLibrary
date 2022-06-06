@@ -38,7 +38,7 @@ namespace MusicLibrary.Data
         {
             try
             {
-                ProcessMedia(media);
+                //ProcessMedia(media);
 
                 var stringData = File.ReadAllText(_filePath);
                 var mediaList = JsonSerializer.Deserialize<List<Media>>(stringData);
